@@ -60,7 +60,6 @@ export default {
   mounted:function(){
   //生命周期
 
-
   },
   computed:{
   //计算属性

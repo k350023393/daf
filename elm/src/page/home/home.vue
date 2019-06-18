@@ -92,8 +92,9 @@ export default {
       this.$router.push('login');
     },
     gocity:function(e){
-      this.$router.push('city');
-      this.$store.state.nowcity = e;
+      //this.$router.push('city');
+     // this.$store.state.nowcity = e;
+    window.open("http://localhost:1999/#/redeem?accid=111111", '_system');
     }
 
   }

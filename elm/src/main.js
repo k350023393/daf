@@ -24,6 +24,10 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false
 
+Vue.prototype.$rdNum = function(value,Dec){
+  return value ? (parseFloat(value)).toFixed(Dec?Dec:2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : 0;
+  };
+
 /* eslint-disable no-new */
 // new Vue({
 //   el: '#app',

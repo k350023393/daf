@@ -35,6 +35,7 @@ header> p.name {
   position: absolute; 
   top: 0; 
   margin-left: 59px;  
+  color:#00132C;
 }
 
 /* 资产卡片 */
@@ -71,6 +72,7 @@ h1 {
 }
 h2 {
   font-size: 20px;
+  color: #00132C;
 }
 h3 { 
   font-size: 16px; 
@@ -137,11 +139,10 @@ div.record > div.title > a.more > img {
   div.record ul > li { 
     width: 49%;
     display: inline-block;
+    margin-right: 1%;
   }
-  div.record ul > li.left { margin-right: 2%;}
 }
 div.record ul { 
-  /* margin-top: 10px;  */
   padding-bottom: 40px;
   font-size: 0;
 }
@@ -152,6 +153,8 @@ div.record ul > li {
   position: relative; 
   border-radius: 10px; 
   box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
+  -moz-box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
+  -webkit-box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
 }
 div.record ul > li > div.infor { 
   position: absolute; 

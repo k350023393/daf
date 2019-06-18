@@ -1,0 +1,113 @@
+.bg{
+    background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(243, 244, 253,1) 100%);
+    position: fixed;
+    z-index: 1; 
+    top:0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+  }
+.main {
+    position: relative;
+    z-index: 2;
+    margin: 0 4%;
+    padding-top: 44px;
+  }
+a,a:visited,a:hover,a:active,a:focus {
+    color: #00132C;
+   }
+
+header { position: relative;}
+header > p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -32px;
+    line-height: 44px;
+    font-size: 16px;
+    color: #00132C;
+}
+
+.tab ul{
+    margin-top: 20px;
+    font-size: 0;    
+}
+.tab ul li{
+    font-size: 16px;
+    color: #00132C;
+    opacity: 0.5;
+    display: inline;   
+    margin-right: 20px; 
+}
+.tab ul li.chosen {
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 1;
+}
+
+h2 {
+    font-size: 20px;
+    color: #00132C;
+  }
+div.record { 
+    margin-top: 20px; 
+    position: relative; 
+    display: block; 
+    z-index: 2; 
+  }
+div.record > div.title > a.more { 
+    position: absolute; 
+    right: 0; 
+    line-height: 28px; 
+    top: 0; }
+div.record > div.title > a.more > img { 
+    margin-top: 3px; 
+  }
+@media screen and (max-width: 640px) {
+    div.record ul > li { 
+      width: 100%;
+    }
+  }
+@media screen and (min-width:641px)  {
+    div.record ul > li { 
+      width: 49%;
+      display: inline-block;
+      margin-right: 1%;
+    }
+  }
+div.record ul { 
+    padding-bottom: 40px;
+    font-size: 0;
+  }
+div.record ul > li { 
+    background-color: #fff; 
+    margin-top: 10px; 
+    height: 100px; 
+    position: relative; 
+    border-radius: 10px; 
+    box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
+  }
+div.record ul > li > div.infor { 
+    position: absolute; 
+    top:20px; 
+    left: 15px; 
+    right: 15px;
+  }
+div.record ul > li > div.infor > p.money { 
+    color: #FF5F5F; 
+    font-size: 16px; 
+    position: absolute; 
+    top: 0px; 
+    right: 0px;
+    font-weight: bold; 
+  }
+div.record ul > li > div.infor > p.date { 
+    margin-top: 10px; 
+    font-size: 12px; 
+    color: #99A1AB;
+  }
+div.record ul > li > img.status { 
+    position:absolute; 
+    bottom: 0; 
+    right:15px; 
+  }

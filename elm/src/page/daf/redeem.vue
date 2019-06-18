@@ -10,21 +10,21 @@
 	    <div class="a-content" >
 		 	<div class="total">
 			 	<div class="t-content">
-				  	<h1 class="normal money">{{acco.total}}</h1>
+				  	<h1 class="normal money">{{$rdNum(acco.total)}}</h1>
 				  	<p class="title">我的总资产</p>
 			  	</div>
 		 	</div>
 			<ul>
 				<li>
-					<h3 class="money">{{acco.available}}</h3>
+					<h3 class="money">{{$rdNum(acco.available)}}</h3>
 					<p class="title" >可资助</p>
 				</li>
 				<li>
-					<h3 class="money">{{acco.subsidizing}}</h3>
+					<h3 class="money">{{$rdNum(acco.subsidizing)}}</h3>
 					<p class="title" >资助中</p>
 				</li>
 				<li>
-			 	 	<h3 class="money">{{acco.subsidized}}</h3>
+			 	 	<h3 class="money">{{$rdNum(acco.subsidized)}}</h3>
 			  		<p class="title" >已资助</p>
 				</li>
 			 </ul>
@@ -34,14 +34,14 @@
 	<div class="record">
 	  	<div class="title">
 		  	<h2>资助记录</h2>
-			  <a href="record.html" class="more">更多 <img src="../../img/more@2x.png" width="18px" height="18px"></a>
+			  <router-link to="record" class="more">更多 <img src="../../img/more@2x.png" width="18px" height="18px"></router-link>
 		</div>
 			 <ul>
-		  		<li class="left" v-for="item in redeemlist">
+		  		<li v-for="(item,index) in redeemlist" :key="item+index">
 			  		<div class="infor">
 				  		<h2>{{item.categoryName}}</h2>
 				  		<p class="date">{{item.occurDate}}</p>
-				  		<p class="money" >{{item.amount}}</p>
+				  		<p class="money" > {{$rdNum(item.amount)}}</p>
 			  		</div>
 			  		<img v-bind:src="item.status" class="status" width="60px" height="48px">
 		  		</li>
@@ -62,6 +62,7 @@ export default {
     return {
 		acco:"",
 		redeemlist:""
+		
     };
   },
   components: {
@@ -69,15 +70,16 @@ export default {
   },
   comouted: {
   },
-  mounted: function(){
-      this.$http.get('/api/wxtrust-daf/accoInfo/111111').then(response => {
+  mounted(){
+      this.geturlparam();
+      this.$http.get('/api/wxtrust-daf/accoInfo/'+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.acco=response.body.result.accoInfo;
       }, response => {
         console.log(response);
 	  });
 	  
-	  this.$http.get('/api/wxtrust-daf/records?accoId=111111').then(response => {
+	  this.$http.get('/api/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.redeemlist=response.body.result.recordList;
 		 for(var i=0;i<this.redeemlist.length;i++){
@@ -94,9 +96,21 @@ export default {
         console.log(response);
       });
   },
-  mehtods: {
-
-  },
+  methods: {
+   geturlparam(){
+	 let returnArr ={};
+     let tempStr = window.location.href;
+     let tempArr = tempStr.split('?')[1] ? tempStr.split('?')[1].split('&') : [];
+     tempArr.forEach(element => {
+     returnArr[element.split('=')[0]] = element.split('=')[1]
+	 });
+	 this.$store.state.acc.id=returnArr;
+	 console.log(returnArr);
+	},
+	gorecord:function(e){
+      this.$router.push('record');
+    }
+  }
 }
 </script>
 
