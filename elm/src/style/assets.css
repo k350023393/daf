@@ -1,0 +1,120 @@
+.bg{
+    background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(243, 244, 253,1) 100%);
+    position: fixed;
+    z-index: 1; 
+    top:0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+  }
+.main {
+    position: relative;
+    z-index: 2;
+    margin: 0 4%;
+    padding-top: 44px;
+  }
+a,a:visited,a:hover,a:active,a:focus {
+    color: #00132C;
+   }
+
+header { position: relative;}
+header > a {
+    display: block;
+    width: 44px;
+    height: 44px;
+   }
+header > p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -32px;
+    line-height: 44px;
+    font-size: 16px;
+    color: #00132C;
+}
+/* 资产卡片 */
+div.assets { 
+  position: relative; 
+  margin-top: 20px; 
+  z-index: 2; 
+  display: block;
+}
+div.assets > div.a-content { 
+  position: relative;
+  z-index: 3;
+  width: 100%; 
+  background:linear-gradient(315deg,rgba(168,125,27,1) 0%,rgba(245,199,97,1) 100%);
+  opacity:1;
+  border-radius:10px; 
+  padding: 20px 15px; 
+}
+div.assets > div.shadow { 
+  position: absolute; 
+  z-index: 2; width: 94%; 
+  margin-left: 3%; 
+  display: block; 
+  top:0; 
+  bottom: 0; 
+  border-radius:10px;
+  opacity: 0.8; 
+  -moz-box-shadow:0px 4px 10px #C39733; 
+  -webkit-box-shadow:0px 4px 10px #C39733; 
+  box-shadow:0px 4px 10px #C39733;  
+}
+h1 { 
+  font-size: 40px;
+}
+h2 {
+  font-size: 20px;
+  color: #00132C;
+}
+h3 { 
+  font-size: 16px; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #00132C
+}
+ h1,h3, p.title   { 
+  color: #fff; 
+}
+
+div.total:after {
+   content: ""; 
+   position: absolute; 
+   left: 15px; 
+   right: 15px; 
+   height:1px; 
+   background-color: #fff; 
+   opacity: 0.2; 
+   margin-top: 10px;
+  }
+div.assets > div.a-content > ul { 
+  margin-top: 20px;
+  font-size: 0; 
+}
+div.assets > div.a-content > ul > li { 
+  display: inline-block;
+  width: 33.33333%; 
+}
+div.assets > div.a-content p.title { 
+  font-size: 12px; 
+  opacity: 0.8; 
+  color:#fff;
+}
+div.assets > div.a-content > div.name { 
+  margin-bottom: 10px; 
+}
+div.assets > div.a-content > div.name > span.line { 
+  border: 1px solid #FFF; 
+}
+div.t-assets { position: relative; z-index: 2; margin-top: 20px; }
+div.t-assets > ul { margin-top: 10px;  margin-bottom: 40px;}
+div.t-assets > ul > li {  width: 100%; border-radius: 10px; background-color: #fff; margin-top: 10px; padding: 20px 15px; position: relative; box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
+    -moz-box-shadow:0px 4px 10px rgba(0,19,44,0.1); 
+    -webkit-box-shadow:0px 4px 10px rgba(0,19,44,0.1); }
+div.t-assets > ul > li > h3 { color: #00132C; font-size: 16px;font-weight: bold;}
+div.t-assets > ul > li > span.status { background-color: #FF5F5F; font-size: 12px; position: absolute; right: 15px; top: 20px;  border-radius: 4px; padding: 3px 6px; color: #FFF; }
+div.t-assets > ul > li > ul { margin-top: 10px; font-size: 0; }
+div.t-assets > ul > li > ul > li { font-size: 12px; width: 25%; display: inline-block; color: #00132C; }
+div.t-assets > ul > li > ul > li > p { opacity: 0.5; }

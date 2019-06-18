@@ -8,14 +8,23 @@
 	</header>
     <div class="tab">
         <ul>
-            <li class="chosen"><span @click="handleClick('1')">审核中</span></li>
-            <li><span @click="handleClick('2')">已完成</span></li>
-            <li><span @click="handleClick('3')">失败</span></li>
+            <li class="chosen"><span @click="handleClick('0')">审核中</span></li>
+            <li><span @click="handleClick('1')">已完成</span></li>
+            <li><span @click="handleClick('2')">失败</span></li>
         </ul>
     </div>
 	<div class="record"  v-for="(item,index) in redeemlist" :key="item+index">
         <template v-if="item.status == status">
-           {{item.categoryName}}
+          	<ul :class="item.status=='1'?'review':'finish'">
+		  	    <li>
+				<div class="infor">
+				  	<h2>{{item.categoryName}}</h2>
+				  	<p class="date">{{item.occurDate}}</p>
+				  	<p class="money" > {{$rdNum(item.amount)}}</p>
+			  	</div>
+                <img :src="item.status=='1'?'../../../static/review@2x.png':'../../../static/finish@2x.png'" class="status" alt="" width="60px" height="48px;" >
+			 </li>
+	  	</ul>
         </template>
 	 </div>
   </section>
@@ -34,7 +43,7 @@ export default {
   data () {
     return {
         redeemlist:"",
-        status: null
+        status: '0'
     };
   },
   //监听属性 类似于data概念
@@ -58,7 +67,7 @@ export default {
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted: function() {
-    this.$http.get('/api/wxtrust-daf/records?accoId='+this.$store.state.acc.id+'&status=0').then(response => {
+    this.$http.get('/api/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.redeemlist=response.body.result.recordList;
       }, response => {

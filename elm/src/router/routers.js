@@ -5,6 +5,8 @@ import city from '../page/city/city'
 import redeem from '../page/daf/redeem'
 import record from '../page/daf/record'
 import test from '../page/daf/test'
+import assets from '../page/daf/assets'
+import assetsdetail from '../page/daf/assetsdetail'
 
 export default [{
     path:'/',
@@ -31,6 +33,12 @@ export default [{
         },{
             path:'/test',
             component:test
+        },{
+            path:'/assets',
+            component:assets
+        },{
+            path:'/assetsdetail',
+            component:assetsdetail
         }
     ]
 }]
