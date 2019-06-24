@@ -94,7 +94,7 @@ export default {
     gocity:function(e){
       //this.$router.push('city');
      // this.$store.state.nowcity = e;
-    window.open("http://localhost:1999/#/redeem?accid=111111", '_system');
+    window.open("http://localhost:1999/#/redeem?accId=111111&fundationId=10001", '_system');
     }
 
   }

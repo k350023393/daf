@@ -8,6 +8,10 @@
 	    </header>
 	<div class="assets"  >
 	    <div class="a-content" >
+            <div class="name">
+				<h3>资产信托名字1</h3>
+				<span class="status line">稳健型</span>
+			</div>
 		 	<div class="total">
 			 	<div class="t-content">
 				  	<h1 class="normal money">{{$rdNum(acco.total)}}</h1>
@@ -31,31 +35,15 @@
 		</div>
 		<div class="shadow"></div>
   	</div>
-		<ul class="type">
-			<h2>可资助类型</h2>
-			<li>扶贫</li>
-			<li>养老</li>
-			<li>济困</li>
-			<li>教育</li>
-		</ul>
         <div class="a-flow">
             <h2>资产流水</h2>
             <ul>
-			    <li>
-					<h3 class="black">用户主动追加</h3>
-					<p class="date">2019-05-31</p>
-					<p class="money red">+10000.00</p>
+			    <li v-for="(item,index) in assetsdetail" :key="item+index">
+					<h3 class="black">{{item.assetsTypeName}}</h3>
+					<p class="date">{{item.occurDate}}</p>
+					<p :class="item.assetsType=='02'?'money red':'money black'">{{item.assetsType=='02'?'+':'-'}}{{$rdNum(item.amount)}}</p>
 			    </li>
-				<li>
-					<h3 class="black">用户主动追加</h3>
-					<p class="date">2019-05-31</p>
-					<p class="money black">-10000.00</p>
-			    </li>
-				<li>
-					<h3 class="black">用户主动追加</h3>
-					<p class="date">2019-05-31</p>
-					<p class="money black">-10000.00</p>
-			    </li>
+				
             </ul>
           </div>
     </section>
@@ -73,7 +61,11 @@ export default {
   },
   data () {
     return {
-         acco:""
+         acco:"",
+         assetsdetail:"",
+         pageFundName:"",
+         pageFundType:"",
+         pageFundCode:""
     };
   },
   //监听属性 类似于data概念
@@ -93,12 +85,18 @@ export default {
 
   },
   mounted(){
-      this.$http.get('/api/wxtrust-daf/accoInfo/'+'111111').then(response => {
+      this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.acco=response.body.result.accoInfo;
       }, response => {
         console.log(response);
-	  });
+      });
+      this.$http.get('/wxtrust-daf/assetsDetail?accoId='+this.$store.state.acc.id).then(response => {
+		 console.log(response);
+		 this.assetsdetail=response.body.result.assetDetailList;
+      }, response => {
+        console.log(response);
+      });
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mehtods: function() {

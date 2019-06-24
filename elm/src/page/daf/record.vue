@@ -67,7 +67,7 @@ export default {
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted: function() {
-    this.$http.get('/api/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
+    this.$http.get('/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.redeemlist=response.body.result.recordList;
       }, response => {

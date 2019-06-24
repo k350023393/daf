@@ -72,14 +72,15 @@ export default {
   },
   mounted(){
       this.geturlparam();
-      this.$http.get('/api/wxtrust-daf/accoInfo/'+this.$store.state.acc.id).then(response => {
+      this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.acco=response.body.result.accoInfo;
+		 this.$store.state.wxacc.id=this.acco.accoId;
       }, response => {
         console.log(response);
 	  });
 	  
-	  this.$http.get('/api/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
+	  this.$http.get('/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.redeemlist=response.body.result.recordList;
 		 for(var i=0;i<this.redeemlist.length;i++){
@@ -104,7 +105,8 @@ export default {
      tempArr.forEach(element => {
      returnArr[element.split('=')[0]] = element.split('=')[1]
 	 });
-	 this.$store.state.acc.id=returnArr;
+	 this.$store.state.acc.id=returnArr["accId"];
+	 this.$store.state.acc.fundationId=returnArr["fundationId"];
 	 console.log(returnArr);
 	},
 	gorecord:function(e){

@@ -8,7 +8,9 @@ Vue.use(Vuex);
 
 const state={
       nowcity:{"name":"","id":""},
-      acc:{"id":"","name":""}
+      acc:{"id":"","name":""},
+      fundationId:{"id":""},
+      wxacc:{"id":""}
 };
 
 export default new Vuex.Store({

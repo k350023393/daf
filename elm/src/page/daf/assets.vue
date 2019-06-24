@@ -34,46 +34,24 @@
         <div class="t-assets">
             <div><h2>全部资产</h2></div>
             <ul>
-			    <li>
-				    <h2>信托产品名字1</h2>
-				    <span class="status">稳健型</span>
+			    <li v-for="(item,index) in assets" :key="item+index">
+				    <h2>{{item.fundName}}</h2>
+				    <span class="status">{{item.fundTypeName}}</span>
 				    <ul>
 					    <li>
-						    <h4 >10000.00</h4>
+						    <h4 >{{$rdNum(item.total)}}</h4>
 						    <p>总资产</p>
 					    </li>
 					    <li>
-						    <h4>10000.00</h4>
+						    <h4>{{$rdNum(item.available)}}</h4>
 						    <p>可资助</p>
 					    </li>
 					    <li>
-						    <h4>10000.00</h4>
+						    <h4>{{$rdNum(item.subsidizing)}}</h4>
 						    <p>资助中</p>
 					    </li>
 					    <li>
-						    <h4>10000.00</h4>
-						    <p>已资助</p>
-					    </li>
-				    </ul>
-			    </li>
-                <li>
-				    <h2>信托产品名字1</h2>
-				    <span class="status">稳健型</span>
-				    <ul>
-					    <li>
-						    <h4 >10000.00</h4>
-						    <p>总资产</p>
-					    </li>
-					    <li>
-						    <h4>10000.00</h4>
-						    <p>可资助</p>
-					    </li>
-					    <li>
-						    <h4>10000.00</h4>
-						    <p>资助中</p>
-					    </li>
-					    <li>
-						    <h4>10000.00</h4>
+						    <h4>{{$rdNum(item.subsidized)}}</h4>
 						    <p>已资助</p>
 					    </li>
 				    </ul>
@@ -95,7 +73,8 @@ export default {
   },
   data () {
     return {
-        acco:""
+        acco:"",
+        assets:""
     };
   },
   //监听属性 类似于data概念
@@ -115,9 +94,16 @@ export default {
 
   },
   mounted(){
-      this.$http.get('/api/wxtrust-daf/accoInfo/'+'111111').then(response => {
+       this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
 		 console.log(response);
 		 this.acco=response.body.result.accoInfo;
+      }, response => {
+        console.log(response);
+      });
+      
+       this.$http.get('/wxtrust-daf/assets?accoId='+this.$store.state.acc.id).then(response => {
+		 console.log(response);
+		 this.assets=response.body.result.assetList;
       }, response => {
         console.log(response);
 	  });
