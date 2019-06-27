@@ -11,13 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/': {
-        target: 'http://122.224.160.23:7004',//后端接口地址
-        changeOrigin: true,//是否允许跨越
-        pathRewrite: {
-          '^/': '' 
-        }
-    }
+
     },
 
     // Various Dev Server settings

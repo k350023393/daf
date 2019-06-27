@@ -11,6 +11,11 @@ import './style/reset.css'
 import './style/mycss.css'
 import Resource from 'vue-resource'
 import {Switch} from 'mint-ui'
+import axios from "axios"
+
+const url =process.env.API_ROOT;
+axios.defaults.baseURL = url; // 关键步骤–填写后台请求统一的地址
+Vue.prototype.$https = axios;
 
 Vue.use(Resource)
 Vue.use(Mint)

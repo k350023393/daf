@@ -1,9 +1,9 @@
 <template>
 <section>
-    <div class="bg"></div>
+    <div class="bg" ></div>
     <section class="main">
         <header>
-		    <a href=""><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></a>
+		    <router-link to="redeem"><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></router-link>
 		    <p> 全部资产</p>
 	    </header>
 	<div class="assets"  >
@@ -34,7 +34,7 @@
         <div class="t-assets">
             <div><h2>全部资产</h2></div>
             <ul>
-			    <li v-for="(item,index) in assets" :key="item+index">
+			    <li v-for="(item,index) in assets" :key="item+index" @click='goassetsdetail({fundcode:item.fundId,fundname:item.fundName})'>
 				    <h2>{{item.fundName}}</h2>
 				    <span class="status">{{item.fundTypeName}}</span>
 				    <ul>
@@ -87,23 +87,26 @@ export default {
   },
   //方法集合
   methods: {
-
+	goassetsdetail:function(e){
+	  this.$router.push('assetsdetail');
+	  this.$store.state.nowfund = e;
+	}
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created: function() {
 
   },
   mounted(){
-       this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
+       this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
 		 console.log(response);
-		 this.acco=response.body.result.accoInfo;
+		 this.acco=response.data.result.accoInfo;
       }, response => {
         console.log(response);
       });
       
-       this.$http.get('/wxtrust-daf/assets?accoId='+this.$store.state.acc.id).then(response => {
+       this.$https.get('/wxtrust-daf/assets?accoId='+this.$store.state.wxacc.id).then(response => {
 		 console.log(response);
-		 this.assets=response.body.result.assetList;
+		 this.assets=response.data.result.assetList;
       }, response => {
         console.log(response);
 	  });

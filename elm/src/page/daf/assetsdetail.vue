@@ -3,13 +3,13 @@
     <div class="bg"></div>
     <section class="main">
         <header>
-		    <a href=""><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></a>
+		    <router-link to="assets"><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></router-link>
 		    <p>资产明细</p>
 	    </header>
 	<div class="assets"  >
 	    <div class="a-content" >
             <div class="name">
-				<h3>资产信托名字1</h3>
+				<h3>{{pageFundName}}</h3>
 				<span class="status line">稳健型</span>
 			</div>
 		 	<div class="total">
@@ -63,7 +63,7 @@ export default {
     return {
          acco:"",
          assetsdetail:"",
-         pageFundName:"",
+         pageFundName:this.$store.state.nowfund.fundname,
          pageFundType:"",
          pageFundCode:""
     };
@@ -78,22 +78,24 @@ export default {
   },
   //方法集合
   methods: {
-
+	goback:function(){
+	  this.$router.push('assets');
+	}
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created: function() {
 
   },
   mounted(){
-      this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
+      this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
 		 console.log(response);
-		 this.acco=response.body.result.accoInfo;
+		 this.acco=response.data.result.accoInfo;
       }, response => {
         console.log(response);
       });
-      this.$http.get('/wxtrust-daf/assetsDetail?accoId='+this.$store.state.acc.id).then(response => {
+      this.$https.get('/wxtrust-daf/assetsDetail?accoId='+this.$store.state.wxacc.id+'&fundCode='+this.$store.state.nowfund.fundcode).then(response => {
 		 console.log(response);
-		 this.assetsdetail=response.body.result.assetDetailList;
+		 this.assetsdetail=response.data.result.assetDetailList;
       }, response => {
         console.log(response);
       });

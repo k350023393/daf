@@ -3,10 +3,10 @@
   <div class="bg"></div>
   <section class="main" >
     <header>
-		  <p class="hq">M</p>
+		  <p class="hq">{{firstname(acco.name)}}</p>
 		  <p class="name"><span>{{acco.name}}</span>,你好</p>
 	</header>
-	<div class="assets"  >
+	<div class="assets"  @click='goassets' >
 	    <div class="a-content" >
 		 	<div class="total">
 			 	<div class="t-content">
@@ -15,7 +15,7 @@
 			  	</div>
 		 	</div>
 			<ul>
-				<li>
+				<li >
 					<h3 class="money">{{$rdNum(acco.available)}}</h3>
 					<p class="title" >可资助</p>
 				</li>
@@ -43,7 +43,7 @@
 				  		<p class="date">{{item.occurDate}}</p>
 				  		<p class="money" > {{$rdNum(item.amount)}}</p>
 			  		</div>
-			  		<img v-bind:src="item.status" class="status" width="60px" height="48px">
+			  		<img v-bind:src="item.statusUrl" class="status" width="60px" height="48px">
 		  		</li>
 	  		</ul>
 	 </div>
@@ -68,34 +68,45 @@ export default {
   components: {
 
   },
-  comouted: {
+  //监听属性 类似于data概念
+  computed: {
+     firstname() {
+        return function(value) {
+          return value?value.substring(0,1):'M';
+        }
+      }
+
   },
   mounted(){
-      this.geturlparam();
-      this.$http.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id).then(response => {
+	  this.geturlparam();
+	  //获取账户信息
+      this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
 		 console.log(response);
-		 this.acco=response.body.result.accoInfo;
+		 this.acco=response.data.result.accoInfo;
 		 this.$store.state.wxacc.id=this.acco.accoId;
-      }, response => {
-        console.log(response);
-	  });
-	  
-	  this.$http.get('/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
+		 
+         //获取资助记录
+		 this.$https.get('/wxtrust-daf/records?accoId='+this.acco.accoId).then(response => {
 		 console.log(response);
-		 this.redeemlist=response.body.result.recordList;
+		 this.redeemlist=response.data.result.recordList;
 		 for(var i=0;i<this.redeemlist.length;i++){
 			 if(this.redeemlist[i].status =="1"){
-				 this.redeemlist[i].status ="/static/finish@2x.png";
+				 this.redeemlist[i].statusUrl ="/static/finish@2x.png";
 			 }
 			 else
 			 {
-                this.redeemlist[i].status ="/static/review@2x.png";
+                this.redeemlist[i].statusUrl ="/static/review@2x.png";
 			 }
 			
 		 }
       }, response => {
         console.log(response);
       });
+      }, response => {
+        console.log(response);
+	  });
+	  
+
   },
   methods: {
    geturlparam(){
@@ -106,12 +117,16 @@ export default {
      returnArr[element.split('=')[0]] = element.split('=')[1]
 	 });
 	 this.$store.state.acc.id=returnArr["accId"];
-	 this.$store.state.acc.fundationId=returnArr["fundationId"];
+	 this.$store.state.fundationId.id=returnArr["fundationId"];
 	 console.log(returnArr);
 	},
 	gorecord:function(e){
       this.$router.push('record');
-    }
+	},
+	goassets:function(){
+      this.$router.push('assets');
+	}
+	
   }
 }
 </script>

@@ -3,26 +3,25 @@
   <div class="bg"></div>
   <section class="main">
     <header>
-		  <a href=""><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></a>
+		  <router-link to="redeem"><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></router-link>
 		  <p>资助记录</p>
 	</header>
     <div class="tab">
         <ul>
-            <li class="chosen"><span @click="handleClick('0')">审核中</span></li>
-            <li><span @click="handleClick('1')">已完成</span></li>
-            <li><span @click="handleClick('2')">失败</span></li>
+            <li :class="this.status=='0'?'chosen':''"><span @click="handleClick('0')">审核中</span></li>
+            <li :class="this.status=='1'?'chosen':''"><span @click="handleClick('1')">已完成</span></li>
         </ul>
     </div>
 	<div class="record"  v-for="(item,index) in redeemlist" :key="item+index">
         <template v-if="item.status == status">
-          	<ul :class="item.status=='1'?'review':'finish'">
+          	<ul :class="item.status=='1'?'finish':'review'">
 		  	    <li>
 				<div class="infor">
 				  	<h2>{{item.categoryName}}</h2>
 				  	<p class="date">{{item.occurDate}}</p>
 				  	<p class="money" > {{$rdNum(item.amount)}}</p>
 			  	</div>
-                <img :src="item.status=='1'?'../../../static/review@2x.png':'../../../static/finish@2x.png'" class="status" alt="" width="60px" height="48px;" >
+                <img :src="item.status=='1'?'../../../static/finish@2x.png':'../../../static/review@2x.png'" class="status" alt="" width="60px" height="48px;" >
 			 </li>
 	  	</ul>
         </template>
@@ -57,7 +56,6 @@ export default {
   //方法集合
   methods: {
     handleClick(status){
-        debugger;
         this.status = status;
     }
   },
@@ -67,9 +65,9 @@ export default {
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted: function() {
-    this.$http.get('/wxtrust-daf/records?accoId='+this.$store.state.acc.id).then(response => {
+     this.$https.get('/wxtrust-daf/records?accoId='+this.$store.state.wxacc.id).then(response => {
 		 console.log(response);
-		 this.redeemlist=response.body.result.recordList;
+		 this.redeemlist=response.data.result.recordList;
       }, response => {
         console.log(response);
       });

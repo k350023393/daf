@@ -10,7 +10,8 @@ const state={
       nowcity:{"name":"","id":""},
       acc:{"id":"","name":""},
       fundationId:{"id":""},
-      wxacc:{"id":""}
+      wxacc:{"id":""},
+      nowfund:{"fundcode":"","fundname":""}
 };
 
 export default new Vuex.Store({
