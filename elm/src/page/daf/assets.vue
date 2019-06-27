@@ -89,22 +89,22 @@ export default {
   methods: {
 	goassetsdetail:function(e){
 	  this.$router.push('assetsdetail');
-	  this.$store.state.nowfund = e;
+	  sessionStorage.setItem('nowfund', JSON.stringify(e));
 	}
   },
-  //生命周期 - 创建完成（可以访问当前this实例）
+    //生命周期 - 创建完成（可以访问当前this实例）
   created: function() {
 
   },
   mounted(){
-       this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
+       this.$https.get('/wxtrust-daf/accoInfo?accoId='+sessionStorage.getItem('accId')+'&fundationId='+sessionStorage.getItem('fundationId')).then(response => {
 		 console.log(response);
 		 this.acco=response.data.result.accoInfo;
       }, response => {
         console.log(response);
       });
       
-       this.$https.get('/wxtrust-daf/assets?accoId='+this.$store.state.wxacc.id).then(response => {
+       this.$https.get('/wxtrust-daf/assets?accoId='+sessionStorage.getItem('wxaccId')).then(response => {
 		 console.log(response);
 		 this.assets=response.data.result.assetList;
       }, response => {

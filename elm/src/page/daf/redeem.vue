@@ -80,11 +80,11 @@ export default {
   mounted(){
 	  this.geturlparam();
 	  //获取账户信息
-      this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
+      this.$https.get('/wxtrust-daf/accoInfo?accoId='+sessionStorage.getItem('accId')+'&fundationId='+sessionStorage.getItem('fundationId')).then(response => {
 		 console.log(response);
 		 this.acco=response.data.result.accoInfo;
-		 this.$store.state.wxacc.id=this.acco.accoId;
-		 
+		 sessionStorage.setItem('wxaccId', this.acco.accoId);
+
          //获取资助记录
 		 this.$https.get('/wxtrust-daf/records?accoId='+this.acco.accoId).then(response => {
 		 console.log(response);
@@ -116,8 +116,12 @@ export default {
      tempArr.forEach(element => {
      returnArr[element.split('=')[0]] = element.split('=')[1]
 	 });
-	 this.$store.state.acc.id=returnArr["accId"];
-	 this.$store.state.fundationId.id=returnArr["fundationId"];
+	 if(returnArr["accId"] !=null && returnArr["accId"] !=""&& returnArr["accId"] != undefined){
+         sessionStorage.setItem('accId', returnArr["accId"]);
+	 }
+	 if(returnArr["fundationId"] !=null && returnArr["fundationId"] !=""&& returnArr["fundationId"] != undefined){
+         sessionStorage.setItem('fundationId', returnArr["fundationId"]);
+	 }
 	 console.log(returnArr);
 	},
 	gorecord:function(e){

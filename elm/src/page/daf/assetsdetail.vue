@@ -9,7 +9,7 @@
 	<div class="assets"  >
 	    <div class="a-content" >
             <div class="name">
-				<h3>{{pageFundName}}</h3>
+				<h3>{{this.pageFund.fundname}}</h3>
 				<span class="status line">稳健型</span>
 			</div>
 		 	<div class="total">
@@ -63,9 +63,7 @@ export default {
     return {
          acco:"",
          assetsdetail:"",
-         pageFundName:this.$store.state.nowfund.fundname,
-         pageFundType:"",
-         pageFundCode:""
+         pageFund:{}
     };
   },
   //监听属性 类似于data概念
@@ -84,17 +82,17 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created: function() {
-
+     this.pageFund =JSON.parse(sessionStorage.getItem('nowfund'))
   },
   mounted(){
-      this.$https.get('/wxtrust-daf/accoInfo?accoId='+this.$store.state.acc.id+'&fundationId='+this.$store.state.fundationId.id).then(response => {
+      this.$https.get('/wxtrust-daf/accoInfo?accoId='+sessionStorage.getItem('accId')+'&fundationId='+sessionStorage.getItem('fundationId')).then(response => {
 		 console.log(response);
 		 this.acco=response.data.result.accoInfo;
       }, response => {
         console.log(response);
       });
-      this.$https.get('/wxtrust-daf/assetsDetail?accoId='+this.$store.state.wxacc.id+'&fundCode='+this.$store.state.nowfund.fundcode).then(response => {
-		 console.log(response);
+      this.$https.get('/wxtrust-daf/assetsDetail?accoId='+sessionStorage.getItem('wxaccId')+'&fundCode='+this.pageFund.fundcode).then(response => {
+     console.log(response);
 		 this.assetsdetail=response.data.result.assetDetailList;
       }, response => {
         console.log(response);
