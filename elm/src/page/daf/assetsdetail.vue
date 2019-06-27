@@ -3,7 +3,7 @@
     <div class="bg"></div>
     <section class="main">
         <header>
-		    <router-link to="assets"><img src="../../img/back@2x.png" alt="" width="44px" height="44px;"></router-link>
+		    <router-link to="assets"><img src=".../../../static/back@2x.png" alt="" width="44px" height="44px;"></router-link>
 		    <p>资产明细</p>
 	    </header>
 	<div class="assets"  >

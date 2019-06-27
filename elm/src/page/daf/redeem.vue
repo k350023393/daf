@@ -34,7 +34,7 @@
 	<div class="record">
 	  	<div class="title">
 		  	<h2>资助记录</h2>
-			  <router-link to="record" class="more">更多 <img src="../../img/more@2x.png" width="18px" height="18px"></router-link>
+			  <router-link to="record" class="more">更多 <img src="../../../static/more@2x.png" width="18px" height="18px"></router-link>
 		</div>
 			 <ul>
 		  		<li v-for="(item,index) in redeemlist" :key="item+index">
