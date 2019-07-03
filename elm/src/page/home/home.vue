@@ -9,24 +9,11 @@
 
     <div class="padtop40">
       <div class="after ih50 padlr10 box bgfff">
-        <span  class="">当前选择城市</span>
-        <span  class="right fs0-8 col9f">定位不准时，请在城市列表选择</span>
+        
+        <mt-field type="text" placeholder="输入用户编号" v-model="svalue" ></mt-field>
+        
       </div>
-      <mt-cell  :title="$store.state.nowcity.name" class="col after" to="city"  is-link  value=""></mt-cell>
-
-      <div class="mgtop10 bgfff">
-        <mt-cell class="after" title="热门城市"></mt-cell>
-        <div class="itembox ovhid col fs0-8">
-          <div @click='gocity({name:item.name,id:item.id})' v-for="item in hotcity">{{item.name}}</div>
-        </div>        
-      </div>         
-
-      <div v-for="(items,index) in getlist" class="mgtop10 bgfff">
-        <mt-cell class="after" :title="index"></mt-cell>
-        <div class="itembox ovhid">
-          <div @click='gocity({name:item.name,id:item.id})' class="nowarp col9f fs0-8" v-for="item in items">{{item.name}}</div>
-        </div>        
-      </div>  
+      <mt-button @click.native="handleClick">按钮</mt-button> 
 
     </div>
     
@@ -39,7 +26,8 @@ export default {
   data () {
     return {
       citylist:"",
-      hotcity:""
+      hotcity:"",
+      svalue:""
     }
   },
   component:{
@@ -94,7 +82,11 @@ export default {
     gocity:function(e){
       //this.$router.push('city');
      // this.$store.state.nowcity = e;
-    window.open("http://localhost:1999/#/redeem?accId=123&fundationId=10001", '_system');
+     //1111111111111111111
+    window.open("http://localhost:1999/#/redeem?accId="+this.svalue+"&fundationId=10001", '_system');
+    },
+    handleClick:function(){
+      window.open("http://localhost:1999/#/redeem?accId="+this.svalue+"&fundationId=10001", '_system');
     }
 
   }
